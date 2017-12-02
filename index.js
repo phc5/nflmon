@@ -72,7 +72,7 @@ axios.get(scoreJSON)
         if (table.length === 0) {
             console.log('No data was received...Is the season over? :(');
         } else {
-            console.log(`Week ${data.w} data of the ${data.y}  ${(data.t === 'REG' ? 'regular season' : 'playoffs')} from nfl.com at ${new Date().toLocaleTimeString()}`);
+            console.log(`Week ${data.w} data of the ${data.y} ${(data.t === 'REG' ? 'regular season' : 'playoffs')} from nfl.com at ${new Date().toLocaleTimeString('en-US')}`);
             console.log(table.toString());
         }
     })
