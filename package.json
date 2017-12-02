@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "nflmon": "./index.js"
+  },
   "author": "Paul Chong",
   "license": "ISC",
   "dependencies": {
@@ -15,7 +18,6 @@
     "colors": "^1.1.2",
     "commander": "^2.12.2",
     "emojic": "^1.1.12",
-    "humanize-plus": "^1.8.2",
     "ora": "^1.3.0"
   }
 }
