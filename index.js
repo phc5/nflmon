@@ -58,7 +58,7 @@ axios.get(scoreJSON)
                 const awayTeam = `${game.v} ${game.vnn}`;
                 const homeScore = game.hs;
                 const awayScore = game.vs;
-                const time = `${game.d} ${game.t}`;
+                const time = `${game.d} ${game.t} EST`;
                 return [
                     time,
                     homeTeam,
