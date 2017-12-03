@@ -5,17 +5,12 @@ const ora = require('ora');
 const cfonts = require('cfonts');
 const Table = require('cli-table2');
 const colors = require('colors');
-const os = require('os');
-
-const platform = os.platform();
-const supportsEmoji = platform !== 'darwin';
-
-const list = val => val.split(',');
 
 program
     .version('0.0.1')
     .parse(process.argv);
 
+// Set up table
 const table = new Table({
     chars: {
         'top': '═',
@@ -34,6 +29,7 @@ const table = new Table({
     head: ['TIME', 'HOME', '', 'AWAY', '']
 });
 
+// Title at the top
 cfonts.say('nflmon', {
     font: 'block',
     align: 'left',
@@ -45,9 +41,11 @@ cfonts.say('nflmon', {
     maxLength: '0'
 });
 
+// Start spinner before calling data.
 const spinner = ora('Loading NFL games').start();
 const scoreJSON = 'https://www.nfl.com/liveupdate/scorestrip/ss.json';
 
+// Fetch data
 axios.get(scoreJSON)
     .then(function (response) {
         spinner.stop();
