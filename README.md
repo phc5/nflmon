@@ -20,6 +20,6 @@ All data comes from www.nfl.com/liveupdates/scorestrip/ss.json
 
 ## To-do
 
-- [ ] Check scores of any week in the current season
-- [ ] Check scores of any week in NFL history
+- [ X ] Check scores of any week in the current season (12/2/2017)
+- [ X ] Check scores of any week in NFL history (12/2/2017)
 - [ ] Convert time to correct time zone

@@ -5,10 +5,18 @@ const ora = require('ora');
 const cfonts = require('cfonts');
 const Table = require('cli-table2');
 const colors = require('colors');
+const convert = require('xml-js');
+const helper = require('./helpers/helpers.js');
+
+const list = val => val.split(',');
 
 program
     .version('0.0.1')
+    .option('-d, --date [week, year, type]', 'Get data at specified week, year of season, and type of season...ex: 3,2017,REG', list, [])
     .parse(process.argv);
+
+const season = program.date;
+const isXML = (season.length === 3 ? true : false);
 
 // Set up table
 const table = new Table({
@@ -43,34 +51,19 @@ cfonts.say('nflmon', {
 
 // Start spinner before calling data.
 const spinner = ora('Loading NFL games').start();
-const scoreJSON = 'https://www.nfl.com/liveupdate/scorestrip/ss.json';
+const scoreJSON = (isXML ? `http://www.nfl.com/ajax/scorestrip?season=${season[1]}&seasonType=${season[2]}&week=${season[0]}` : 'https://www.nfl.com/liveupdate/scorestrip/ss.json');
 
 // Fetch data
 axios.get(scoreJSON)
     .then(function (response) {
         spinner.stop();
-        const data = response.data;
-        data.gms
-            .map(game => {
-                const homeTeam = `${game.h} ${game.hnn}`;
-                const awayTeam = `${game.v} ${game.vnn}`;
-                const homeScore = game.hs;
-                const awayScore = game.vs;
-                const time = `${game.d} ${game.t} EST`;
-                return [
-                    time,
-                    homeTeam,
-                    homeScore,
-                    awayTeam,
-                    awayScore
-                ];
-            })
-            .forEach(game => table.push(game));
+        const data = (isXML ? JSON.parse(convert.xml2json(response.data, {compact: true, spaces: 4})) : response.data);
+        (isXML) ? helper.mapOverXML(data.ss.gms.g, table) : helper.mapOverJSON(data.gms, table);
 
         if (table.length === 0) {
             console.log('No data was received...Is the season over? :(');
         } else {
-            console.log(`Week ${data.w} data of the ${data.y} ${(data.t === 'REG' ? 'regular season' : 'playoffs')} from nfl.com at ${new Date().toLocaleTimeString('en-US')}`);
+            helper.getDataInfo(isXML, data);
             console.log(table.toString());
         }
     })
