@@ -29,10 +29,13 @@ The type field has three possible choices: `PRE`, `REG`, and `POST`.
 - `POST` consists of weeks `18-22`.
 
 ## Data
-All data comes from www.nfl.com/liveupdates/scorestrip/ss.json
+All data comes from www.nfl.com/liveupdates/scorestrip/ss.json and http://www.nfl.com/ajax/scorestrip.
+I had to use two different endpoints because it was difficult to find any API's that would let me get data on boxscores.
+Please let me know if there are any better alternatives.
 
 ## To-do
 
 - [X] Check scores of any week in the current season (12/2/2017)
 - [X] Check scores of any week in NFL history (12/2/2017)
 - [ ] Convert time to correct time zone
+- [ ] Allow spaces in between fields after `-d` flag
