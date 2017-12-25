@@ -13,7 +13,7 @@ const list = val => val.split(',');
 program
     .version('0.0.1')
     .option('-n, --nflmon', 'get scores for current week')
-    .option('-b, --boris [position, scoring]', 'get data from borischen.co(ex: rb, half)', list, ['qb', 'standard]'])
+    .option('-b, --boris [position, scoring]', 'get data from borischen.co(ex: rb, half)', list, [])
     .option('-d, --date [week, year, type]', 'get data at week, year, and type of season(ex: 3,2017,REG)', list, [])
     .parse(process.argv);
 
