@@ -35,17 +35,18 @@ To get the tiers on the command line use:
 ```
 $ nflmon -b [position,scoring]
 ```
-where the fields in the [] are type without spaces. For example, `nflmon -b wr,half`.
+where the fields in the [] are typed without spaces. For example, `nflmon -b wr,half`.
 
 #### position and scoring
 The `position` field has many possibilities: `qb`, `rb`, `wr`, `te`, `k`, `dst`, and `flex`.
 
 The `scoring` field has three possibilities: `standard`, `half`, and `full`.
 
-## Data
-All data comes from www.nfl.com/liveupdates/scorestrip/ss.json and http://www.nfl.com/ajax/scorestrip.
+## Scores Data
+All data for scores omes from www.nfl.com/liveupdates/scorestrip/ss.json and http://www.nfl.com/ajax/scorestrip.
 I had to use two different endpoints because it was difficult to find any API's that would let me get data on boxscores.
 Please let me know if there are any better alternatives.
+
 
 ## To-do
 
