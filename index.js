@@ -19,7 +19,7 @@ program
 
 const isNflmon = program.nflmon;
 const borisArgs = program.boris;
-const isBoris = (borisArgs.length === 2)
+const isBoris = (borisArgs.length >= 1 ? true : false)
 
 const season = program.date;
 const isXML = (season.length === 3);
@@ -72,12 +72,7 @@ if (isNflmon || isXML) {
 } else if (isBoris) {
     helper.title('borischen.co');
 
-    boris.getTiers(borisArgs[0], borisArgs[1])
-        .then((object) => {
-            console.log(`Tiers for ${object.position} in ${object.scoring} ppr`);
-            boris.print(object.tierList);
-            console.log(`\n\nData from ${object.url}`);
-        });
+    boris.validateInput(borisArgs[0], borisArgs[1]);
 } else {
     console.log('Use a flag with the command nflmon: -b, -d, or -n');
     console.log('Type nflmon -h for help');

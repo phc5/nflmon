@@ -32,7 +32,11 @@ const scoringObject = {
 	}
 };
 
-exports.getTiers = (position, scoring) => {
+const noScoring = ['qb', 'k', 'dst'];
+const validPositions = ['qb', 'rb', 'te', 'wr', 'k', 'dst', 'flex'];
+const validFormat = ['standard', 'half', 'full'];
+
+const getTiers = (position, scoring) => {
 	return new Promise((resolve, reject) => {
 		var url = scoringObject[scoring][position];
 		request(url, (err, res, body) => {
@@ -59,8 +63,31 @@ exports.getTiers = (position, scoring) => {
 	});
 };
 
-exports.print = (tierList) => {
+const print = (tierList) => {
 	tierList.map((tiers) => {
 		console.log(tiers);
 	});
 };
+
+const validateInput = (position, scoring) => {
+	if (!validPositions.includes(position)) {
+		console.log('Invalid position entered... Please use qb, rb, wr, te, k, dst, or flex');
+		return;
+	}
+
+	if (noScoring.includes(position)) {
+		scoring = 'standard';
+	}
+
+	getTiers(position, scoring)
+		.then((object) => {
+			var scoringString = (object.scoring == 'half') || (object.scoring == 'full') ? 'ppr' : ''
+            console.log(`Tiers for ${object.position} in ${object.scoring} ${scoringString}`);
+            print(object.tierList);
+            console.log(`\n\nData from ${object.url}`);
+        });
+}
+
+module.exports = {
+	validateInput
+}
