@@ -5,8 +5,10 @@ const ora = require('ora');
 const Table = require('cli-table2');
 const colors = require('colors');
 const convert = require('xml-js');
+
 const helper = require('./helpers/helpers.js');
 const boris = require('./helpers/boris.js');
+const freeagent = require('./helpers/freeagent.js');
 
 const list = val => val.split(',');
 
@@ -15,6 +17,7 @@ program
     .option('-n, --nflmon', 'get scores for current week')
     .option('-b, --boris [position, scoring]', 'get data from borischen.co(ex: rb, half)', list, [])
     .option('-d, --date [week, year, type]', 'get data at week, year, and type of season(ex: 3,2017,REG)', list, [])
+    .option('-f, --freeAgent', 'add freeagent')
     .parse(process.argv);
 
 const isNflmon = program.nflmon;
@@ -23,6 +26,8 @@ const isBoris = (borisArgs.length >= 1 ? true : false)
 
 const season = program.date;
 const isXML = (season.length === 3);
+
+const isFreeAgent = program.freeAgent;
 
 // Start spinner before calling data.
 const spinner = ora('Loading NFL games').start();
@@ -75,12 +80,15 @@ if (isNflmon || isXML) {
     });
 
 } else if (isBoris) {
-    helper.title('borischen.co');
-
-    boris.validateInput(borisArgs[0], borisArgs[1]);
     spinner.stop();
+    helper.title('borischen.co');
+    boris.validateInput(borisArgs[0], borisArgs[1]);
+} else if (isFreeAgent) {
+    spinner.stop();
+    helper.title('Free Agent Adder');
+    freeagent.prompt();
 } else {
+    spinner.stop();
     console.log('Use a flag with the command nflmon: -b, -d, or -n');
     console.log('Type nflmon -h for help');
-    spinner.stop();
 }

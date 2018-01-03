@@ -42,8 +42,19 @@ The `position` field has many possibilities: `qb`, `rb`, `wr`, `te`, `k`, `dst`,
 
 The `scoring` field has three possibilities: `standard`, `half`, and `full`.
 
+### Yahoo! Free Agent Adder
+Using the `-f` flag, you put in waiver claims to add free agents.
+
+To get started, use:
+```
+$ nflmon -f
+```
+
+You will be prompted with four questions: username, password, # of transactions, and the players to add and drop.
+
+
 ## Scores Data
-All data for scores omes from www.nfl.com/liveupdates/scorestrip/ss.json and http://www.nfl.com/ajax/scorestrip.
+All data for weekly scores comes from www.nfl.com/liveupdates/scorestrip/ss.json and http://www.nfl.com/ajax/scorestrip.
 I had to use two different endpoints because it was difficult to find any API's that would let me get data on boxscores.
 Please let me know if there are any better alternatives.
 
@@ -55,3 +66,6 @@ Please let me know if there are any better alternatives.
 - [ ] Convert time to correct time zone
 - [ ] Allow spaces in between fields after `-d` flag
 - [X] Get tiers from borischen
+- [X] Port over free agent functionality from Gambit repo
+- [ ] Add cron job functionality
+- [ ] Finish up waiver adding process

@@ -14,6 +14,11 @@ const title = (name) => {
     });
 };
 
+const toTitleCase = string => {
+    return string.replace(/\w\S*/g, function(text){return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();});
+};
+
+
 const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -67,9 +72,10 @@ const getDataInfo = (isXML, data) => {
 };
 
 module.exports = {
-    title,
     capitalizeFirstLetter,
-    mapOverXML,
+    getDataInfo,
     mapOverJSON,
-    getDataInfo
+    mapOverXML,
+    title,
+    toTitleCase
 }
