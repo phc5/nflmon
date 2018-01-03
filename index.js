@@ -54,18 +54,23 @@ if (isNflmon || isXML) {
     axios.get(scoreJSON)
     .then(function (response) {
         spinner.stop();
-        const data = (isXML ? JSON.parse(convert.xml2json(response.data, {compact: true, spaces: 4})) : response.data);
-        (isXML) ? helper.mapOverXML(data.ss.gms.g, scoreTable) : helper.mapOverJSON(data.gms, scoreTable);
+        if (response && response.data) {
+            const data = (isXML ? JSON.parse(convert.xml2json(response.data, {compact: true, spaces: 4})) : response.data);
+            (isXML) ? helper.mapOverXML(data.ss.gms.g, scoreTable) : helper.mapOverJSON(data.gms, scoreTable);
 
-        if (scoreTable.length === 0) {
-            console.log('No data was received...Is the season over? :(');
+            if (scoreTable.length === 0) {
+                console.log('No data was received...Is the season over? :(');
+            } else {
+                helper.getDataInfo(isXML, data);
+                console.log(scoreTable.toString());
+            }
         } else {
-            helper.getDataInfo(isXML, data);
-            console.log(scoreTable.toString());
+            console.log('No live updates on scores...Is the season over?');
         }
     })
     .catch(function (error) {
         spinner.stop();
+        console.log('there');
         console.log('Oops... something went wrong: ' + error);
     });
 
@@ -73,7 +78,9 @@ if (isNflmon || isXML) {
     helper.title('borischen.co');
 
     boris.validateInput(borisArgs[0], borisArgs[1]);
+    spinner.stop();
 } else {
     console.log('Use a flag with the command nflmon: -b, -d, or -n');
     console.log('Type nflmon -h for help');
+    spinner.stop();
 }

@@ -1,6 +1,6 @@
 const cfonts = require('cfonts');
 
-exports.title = (name) => {
+const title = (name) => {
     // Title at the top
     cfonts.say(name, {
         font: 'block',
@@ -14,11 +14,11 @@ exports.title = (name) => {
     });
 };
 
-exports.capitalizeFirstLetter = string => {
+const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-exports.mapOverXML = (xmlData, table, isXML) => {
+const mapOverXML = (xmlData, table, isXML) => {
     xmlData
         .map(data => {
             var game = data._attributes;
@@ -38,7 +38,7 @@ exports.mapOverXML = (xmlData, table, isXML) => {
         .forEach(game => table.push(game));
 };
 
-exports.mapOverJSON = (jsonData, table) => {
+const mapOverJSON = (jsonData, table) => {
     jsonData
         .map(game => {
             const homeTeam = `${game.h} ${game.hnn}`;
@@ -57,7 +57,7 @@ exports.mapOverJSON = (jsonData, table) => {
         .forEach(game => table.push(game));
 };
 
-exports.getDataInfo = (isXML, data) => {
+const getDataInfo = (isXML, data) => {
     if (isXML) {
         var info = data.ss.gms._attributes;
         console.log(`Week ${info.w} data of the ${info.y} ${(info.t === 'REG' ? 'regular season' : 'playoffs')} from nfl.com at ${new Date().toLocaleTimeString('en-US')}`);
@@ -65,3 +65,11 @@ exports.getDataInfo = (isXML, data) => {
         console.log(`Week ${data.w} data of the ${data.y} ${(data.t === 'REG' ? 'regular season' : 'playoffs')} from nfl.com at ${new Date().toLocaleTimeString('en-US')}`);
     }
 };
+
+module.exports = {
+    title,
+    capitalizeFirstLetter,
+    mapOverXML,
+    mapOverJSON,
+    getDataInfo
+}
