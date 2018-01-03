@@ -5,6 +5,8 @@ This is a CLI tool that gives you the latest scores in the NFL.
 
 ## Usage
 
+---
+
 ### Current Week Scores
 Follow these steps to use this tool on your local computer.
 ```
@@ -14,6 +16,8 @@ $ npm install -g
 $ npm link
 $ nflmon -n
 ```
+---
+
 ### Any Week Scores
 To get the scores of any week at any point in time in the NFL (with whatever data we have):
 ```
@@ -27,6 +31,8 @@ The `type` field has three possible choices: `PRE`, `REG`, and `POST`.
 - `PRE` consists of weeks `0-4`.
 - `REG` consists of weeks `5-17`.
 - `POST` consists of weeks `18-22`.
+
+---
 
 ### borischen.co Tier Rankings
 borischen.co is a great source for tier rankings (projections) for startable players. Check out his website: http://www.borischen.co
@@ -42,6 +48,8 @@ The `position` field has many possibilities: `qb`, `rb`, `wr`, `te`, `k`, `dst`,
 
 The `scoring` field has three possibilities: `standard`, `half`, and `full`.
 
+---
+
 ### Yahoo! Free Agent Adder
 Using the `-f` flag, you put in waiver claims to add free agents.
 
@@ -51,7 +59,6 @@ $ nflmon -f
 ```
 
 You will be prompted with four questions: username, password, # of transactions, and the players to add and drop.
-
 
 ## Scores Data
 All data for weekly scores comes from www.nfl.com/liveupdates/scorestrip/ss.json and http://www.nfl.com/ajax/scorestrip.
