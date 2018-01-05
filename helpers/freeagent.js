@@ -81,6 +81,7 @@ async function login(username, password, listOfPlayers, numberOfTransactions) {
   await page.screenshot({path: 'example.png', fullPage: true});
 
   //complete waiver process...
+  await browser.close();
 };
 
 module.exports = {
